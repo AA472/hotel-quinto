@@ -3,9 +3,7 @@ import { getActiveBookings } from "@/lib/booking/store";
 import { getRoomType } from "@/lib/booking/rooms";
 
 // ─── iCal Feed ───────────────────────────────────────────────────────────────
-// This endpoint generates an iCal (.ics) feed of all active bookings.
-// Channel managers (Booking.com, Airbnb, etc.) can subscribe to this URL
-// to sync availability. Many OTAs support iCal import for small properties.
+// Channel managers (Booking.com, Airbnb, etc.) subscribe to this URL.
 //
 // Usage: GET /api/bookings/ical?room=standard
 //        GET /api/bookings/ical (all rooms)
@@ -23,7 +21,9 @@ function escapeICalText(text: string): string {
 
 export async function GET(req: NextRequest) {
   const roomFilter = req.nextUrl.searchParams.get("room");
-  const bookings = getActiveBookings().filter(
+
+  const allBookings = await getActiveBookings();
+  const bookings = allBookings.filter(
     (b) => !roomFilter || b.roomTypeId === roomFilter
   );
 

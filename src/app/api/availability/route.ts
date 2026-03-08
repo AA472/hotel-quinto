@@ -14,7 +14,6 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  // Validate dates
   const ciDate = new Date(checkIn);
   const coDate = new Date(checkOut);
   if (isNaN(ciDate.getTime()) || isNaN(coDate.getTime())) {
@@ -30,7 +29,7 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const results = checkAvailability({
+  const results = await checkAvailability({
     checkIn,
     checkOut,
     guests: guests ? parseInt(guests, 10) : undefined,

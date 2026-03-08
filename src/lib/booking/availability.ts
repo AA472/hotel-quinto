@@ -9,33 +9,37 @@ function daysBetween(a: string, b: string): number {
   );
 }
 
-export function checkAvailability(
+export async function checkAvailability(
   query: AvailabilityQuery
-): RoomAvailability[] {
+): Promise<RoomAvailability[]> {
   const { checkIn, checkOut, guests } = query;
   const nights = daysBetween(checkIn, checkOut);
 
   if (nights < 1) return [];
 
-  return ROOM_TYPES.filter((room) => !guests || room.capacity >= guests).map(
-    (room) => {
-      const overlapping = getBookingsForDateRange(
-        checkIn,
-        checkOut,
-        room.id
-      );
-      const remaining = room.totalInventory - overlapping.length;
+  const results: RoomAvailability[] = [];
 
-      return {
-        roomTypeId: room.id,
-        available: remaining > 0,
-        remainingRooms: Math.max(0, remaining),
-        pricePerNightUSD: room.basePriceUSD,
-        pricePerNightCOP: room.basePriceCOP,
-        totalNights: nights,
-        totalPriceUSD: room.basePriceUSD * nights,
-        totalPriceCOP: room.basePriceCOP * nights,
-      };
-    }
-  );
+  for (const room of ROOM_TYPES) {
+    if (guests && room.capacity < guests) continue;
+
+    const overlapping = await getBookingsForDateRange(
+      checkIn,
+      checkOut,
+      room.id
+    );
+    const remaining = room.totalInventory - overlapping.length;
+
+    results.push({
+      roomTypeId: room.id,
+      available: remaining > 0,
+      remainingRooms: Math.max(0, remaining),
+      pricePerNightUSD: room.basePriceUSD,
+      pricePerNightCOP: room.basePriceCOP,
+      totalNights: nights,
+      totalPriceUSD: room.basePriceUSD * nights,
+      totalPriceCOP: room.basePriceCOP * nights,
+    });
+  }
+
+  return results;
 }

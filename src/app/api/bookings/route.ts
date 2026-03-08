@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { checkAvailability } from "@/lib/booking/availability";
 import { saveBooking } from "@/lib/booking/store";
 import { getRoomType } from "@/lib/booking/rooms";
+import { sendBookingNotification } from "@/lib/booking/email";
 import type { Booking, CreateBookingInput } from "@/lib/booking/types";
 
 function generateId(): string {
@@ -42,7 +43,6 @@ export async function POST(req: NextRequest) {
     externalId,
   } = body;
 
-  // Validate required fields
   if (
     !roomTypeId ||
     !checkIn ||
@@ -58,7 +58,6 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Validate room type
   const room = getRoomType(roomTypeId);
   if (!room) {
     return NextResponse.json(
@@ -67,7 +66,6 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Check capacity
   const totalGuests = adults + (children || 0);
   if (totalGuests > room.capacity) {
     return NextResponse.json(
@@ -78,8 +76,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Check availability
-  const availability = checkAvailability({
+  const availability = await checkAvailability({
     checkIn,
     checkOut,
     guests: totalGuests,
@@ -118,7 +115,10 @@ export async function POST(req: NextRequest) {
     updatedAt: now,
   };
 
-  saveBooking(booking);
+  await saveBooking(booking);
+
+  // Send email notifications (don't block the response)
+  sendBookingNotification(booking).catch(console.error);
 
   return NextResponse.json({ booking }, { status: 201 });
 }
