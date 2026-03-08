@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Hotel Quinto — Boutique Eco-Hotel in Colombia's Coffee Region",
     description:
       "Boutique eco-hotel in UNESCO's Coffee Cultural Landscape. Bamboo architecture, pool, river, waterfall, and breathtaking sunsets in Quindío, Colombia.",
-    url: "https://www.hotelquinto.com",
+    url: "https://hotelquinto.com",
     siteName: "Hotel Quinto",
     type: "website",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Hotel Quinto pool and bamboo architecture" }],
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     images: [OG_IMAGE],
   },
   alternates: {
-    canonical: "https://www.hotelquinto.com",
+    canonical: "https://hotelquinto.com",
   },
 };
 
@@ -72,7 +72,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Hotel",
               name: "Hotel Quinto",
-              url: "https://www.hotelquinto.com",
+              url: "https://hotelquinto.com",
               image: OG_IMAGE,
               description:
                 "Boutique eco-hotel in Colombia's Coffee Cultural Landscape, a UNESCO World Heritage Site.",

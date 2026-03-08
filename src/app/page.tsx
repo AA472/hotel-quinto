@@ -174,11 +174,15 @@ function Nav() {
                 {link.label}
               </a>
             ))}
+            <a
+              href="/buyers-guide"
+              className="hover:opacity-100 opacity-80 transition-opacity"
+            >
+              {lang === "en" ? "Buyer's Guide" : "Guía del Comprador"}
+            </a>
             <LanguageToggle lang={lang} onChange={setLang} scrolled={scrolled} />
             <a
-              href="https://www.hotelquinto.com/booking-engine"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/book"
               className="bg-amber-700 hover:bg-amber-800 text-white px-5 py-2.5 rounded-lg font-semibold transition-colors"
             >
               {t("nav.book")}
@@ -211,9 +215,14 @@ function Nav() {
               </a>
             ))}
             <a
-              href="https://www.hotelquinto.com/booking-engine"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/buyers-guide"
+              onClick={() => setMobileOpen(false)}
+              className="text-stone-700 hover:text-stone-900 py-3 text-base font-medium border-b border-stone-100"
+            >
+              {lang === "en" ? "Buyer's Guide" : "Guía del Comprador"}
+            </a>
+            <a
+              href="/book"
               className="mt-3 bg-amber-700 hover:bg-amber-800 text-white px-5 py-3 rounded-lg font-semibold text-center transition-colors"
             >
               {t("nav.book")}
@@ -271,9 +280,7 @@ function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
-              href="https://www.hotelquinto.com/booking-engine"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/book"
               className="group inline-flex items-center gap-2 bg-amber-700 hover:bg-amber-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all hover:shadow-lg hover:shadow-amber-700/20"
             >
               {t("hero.cta")}
@@ -474,23 +481,11 @@ function Rooms() {
                     </span>
                   </div>
                   <div className="flex items-center justify-between pt-4 border-t border-stone-800">
-                    <p>
-                      <span className="text-xs text-stone-500">
-                        {t("rooms.from")}{" "}
-                      </span>
-                      <span className="font-heading text-2xl font-bold text-gold">
-                        {lang === "es"
-                          ? `$${formatCOP(room.priceCOP)}`
-                          : `$${room.priceUSD}`}
-                      </span>
-                      <span className="text-xs text-stone-500">
-                        {" "}{lang === "es" ? "COP" : "USD"} {t("rooms.night")}
-                      </span>
+                    <p className="text-sm font-semibold text-gold">
+                      {lang === "es" ? "Consultar precio" : "Contact for price"}
                     </p>
                     <a
-                      href="https://www.hotelquinto.com/booking-engine"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="/book"
                       className="text-sm font-semibold text-amber-600 hover:text-amber-500 transition-colors flex items-center gap-1 group/link"
                     >
                       {t("rooms.book")}
@@ -827,48 +822,33 @@ function Contact() {
         </ScrollReveal>
 
         <ScrollReveal delay={150}>
-          <a
-            href="https://www.hotelquinto.com/booking-engine"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 bg-amber-700 hover:bg-amber-600 text-white px-10 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-lg hover:shadow-amber-700/20 mb-5"
-          >
-            {t("contact.book")}
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-          </a>
-          <div className="flex items-center justify-center gap-4 text-sm text-stone-500 mb-12">
+          <div className="flex items-center justify-center gap-4 text-sm text-stone-400 mb-10">
             <span>{t("contact.checkin")}</span>
             <span className="w-1 h-1 rounded-full bg-stone-600" />
             <span>{t("contact.checkout")}</span>
           </div>
-        </ScrollReveal>
-
-        <ScrollReveal delay={300}>
-          <p className="text-stone-500 text-sm mb-6">
-            {t("contact.or")}
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
             <a
               href="https://wa.me/573202190476"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white/70 hover:text-white border border-white/15 hover:border-white/30 px-6 py-3 rounded-lg transition-all hover:bg-white/5"
+              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20BD5A] text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-lg hover:shadow-[#25D366]/20"
             >
-              <MessageCircle className="h-4 w-4" />
+              <MessageCircle className="h-5 w-5" />
               WhatsApp
             </a>
             <a
               href="mailto:info@hotelquinto.com"
-              className="inline-flex items-center gap-2 text-white/70 hover:text-white border border-white/15 hover:border-white/30 px-6 py-3 rounded-lg transition-all hover:bg-white/5"
+              className="inline-flex items-center gap-3 bg-amber-700 hover:bg-amber-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:shadow-lg hover:shadow-amber-700/20"
             >
-              <Mail className="h-4 w-4" />
+              <Mail className="h-5 w-5" />
               info@hotelquinto.com
             </a>
             <a
               href="tel:+573202190476"
-              className="inline-flex items-center gap-2 text-white/70 hover:text-white border border-white/15 hover:border-white/30 px-6 py-3 rounded-lg transition-all hover:bg-white/5"
+              className="inline-flex items-center gap-3 border-2 border-gold/40 hover:border-gold text-gold hover:text-white hover:bg-gold/10 px-8 py-4 rounded-xl font-semibold text-lg transition-all"
             >
-              <Phone className="h-4 w-4" />
+              <Phone className="h-5 w-5" />
               +57 320 219 0476
             </a>
           </div>
