@@ -28,6 +28,8 @@ import {
   WashingMachine,
   Plane,
   Quote,
+  BookOpen,
+  CheckCircle,
 } from "lucide-react";
 
 import { LanguageProvider, useLanguage } from "./components/language-context";
@@ -118,6 +120,7 @@ function Page() {
       <Divider />
       <Amenities />
       <Gallery />
+      <BuyersGuide />
       <Location />
       <Contact />
       <Footer />
@@ -714,6 +717,101 @@ function Gallery() {
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 1024px) 50vw, 25vw"
               />
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Buyer's Guide CTA ───────────────────────────────────────────────────────
+
+function BuyersGuide() {
+  const { lang } = useLanguage();
+
+  const highlights = lang === "en"
+    ? [
+        "Best neighborhoods & price breakdowns",
+        "Step-by-step legal process for foreigners",
+        "Realistic investment return projections",
+        "Due diligence checklist from local experts",
+      ]
+    : [
+        "Mejores barrios y desglose de precios",
+        "Proceso legal paso a paso para extranjeros",
+        "Proyecciones realistas de retorno de inversión",
+        "Lista de verificación de expertos locales",
+      ];
+
+  return (
+    <section className="py-24 sm:py-32 bg-forest">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <ScrollReveal>
+            <div>
+              <div className="inline-flex items-center gap-2 text-gold font-semibold tracking-[0.15em] uppercase text-sm mb-3">
+                <BookOpen className="w-4 h-4" />
+                {lang === "en" ? "Buyer's Guide" : "Guía del Comprador"}
+              </div>
+              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+                {lang === "en"
+                  ? "Thinking About Buying Property in Coffee Country?"
+                  : "¿Pensando en Comprar Propiedad en la Zona Cafetera?"}
+              </h2>
+              <p className="text-white/70 text-lg mb-8">
+                {lang === "en"
+                  ? "Our comprehensive guide covers everything — from legal processes and neighborhood breakdowns to investment returns and insider tips from locals who know the region."
+                  : "Nuestra guía completa cubre todo — desde procesos legales y análisis de barrios hasta retornos de inversión y consejos de expertos locales."}
+              </p>
+              <ul className="space-y-3 mb-8">
+                {highlights.map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-white/80">
+                    <CheckCircle className="w-5 h-5 text-gold shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="/buyers-guide"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gold text-forest font-semibold rounded-lg hover:bg-gold-dark transition-colors text-lg"
+              >
+                {lang === "en" ? "Read the Guide" : "Leer la Guía"}
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={200}>
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8">
+              <div className="text-center mb-6">
+                <span className="text-5xl font-heading text-white font-bold">$19</span>
+                <span className="text-3xl font-heading text-white">.99</span>
+                <span className="text-white/50 text-sm ml-1">USD</span>
+              </div>
+              <p className="text-white/50 text-center text-sm mb-6">
+                {lang === "en"
+                  ? "One-time purchase — 7 in-depth chapters"
+                  : "Compra única — 7 capítulos detallados"}
+              </p>
+              <div className="space-y-3 text-sm">
+                {[
+                  lang === "en" ? "Why buy in the Coffee Region" : "Por qué comprar en la Zona Cafetera",
+                  lang === "en" ? "Neighborhoods & areas guide" : "Guía de barrios y zonas",
+                  lang === "en" ? "Legal process for foreign buyers" : "Proceso legal para extranjeros",
+                  lang === "en" ? "Property types & pricing" : "Tipos de propiedad y precios",
+                  lang === "en" ? "Investment & rental returns" : "Retornos de inversión y alquiler",
+                  lang === "en" ? "Due diligence checklist" : "Lista de verificación",
+                  lang === "en" ? "Living in the Coffee Region" : "Vivir en la Zona Cafetera",
+                ].map((ch, i) => (
+                  <div key={i} className="flex items-center gap-3 text-white/70">
+                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-gold/20 text-gold text-xs font-semibold shrink-0">
+                      {i + 1}
+                    </span>
+                    <span>{ch}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </ScrollReveal>
         </div>
