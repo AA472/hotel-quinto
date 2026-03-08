@@ -294,7 +294,7 @@ function GuideContent() {
 
 export default function BuyersGuidePage() {
   const [searchParams, setSearchParams] = useState<URLSearchParams | null>(null);
-  const [accessGranted, setAccessGranted] = useState(true); // TODO: set back to false to enable paywall
+  const [accessGranted, setAccessGranted] = useState(false);
   const [verifying, setVerifying] = useState(false);
 
   useEffect(() => {
