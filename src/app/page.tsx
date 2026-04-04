@@ -183,6 +183,12 @@ function Nav() {
             >
               {lang === "en" ? "Buyer's Guide" : "Guía del Comprador"}
             </a>
+            <a
+              href="/consultations"
+              className="hover:opacity-100 opacity-80 transition-opacity"
+            >
+              {lang === "en" ? "Consultations" : "Consultas"}
+            </a>
             <LanguageToggle lang={lang} onChange={setLang} scrolled={scrolled} />
             <a
               href="/book"
@@ -223,6 +229,13 @@ function Nav() {
               className="text-stone-700 hover:text-stone-900 py-3 text-base font-medium border-b border-stone-100"
             >
               {lang === "en" ? "Buyer's Guide" : "Guía del Comprador"}
+            </a>
+            <a
+              href="/consultations"
+              onClick={() => setMobileOpen(false)}
+              className="text-stone-700 hover:text-stone-900 py-3 text-base font-medium border-b border-stone-100"
+            >
+              {lang === "en" ? "Consultations" : "Consultas"}
             </a>
             <a
               href="/book"
