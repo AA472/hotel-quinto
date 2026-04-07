@@ -13,10 +13,10 @@ import {
 
 type Tier = "intro" | "standard" | "premium";
 
-const CALENDLY_URLS: Record<Tier, string> = {
-  intro: process.env.NEXT_PUBLIC_CALENDLY_INTRO || "",
-  standard: process.env.NEXT_PUBLIC_CALENDLY_STANDARD || "",
-  premium: process.env.NEXT_PUBLIC_CALENDLY_PREMIUM || "",
+const CALCOM_URLS: Record<Tier, string> = {
+  intro: process.env.NEXT_PUBLIC_CALCOM_INTRO || "",
+  standard: process.env.NEXT_PUBLIC_CALCOM_STANDARD || "",
+  premium: process.env.NEXT_PUBLIC_CALCOM_PREMIUM || "",
 };
 
 const tierLabels: Record<Tier, { title: string; duration: string }> = {
@@ -60,8 +60,8 @@ function SuccessContent() {
       .catch(() => setStatus("error"));
   }, [sessionId]);
 
-  const validTier = tier && tier in CALENDLY_URLS ? tier : null;
-  const calendlyUrl = validTier ? CALENDLY_URLS[validTier] : "";
+  const validTier = tier && tier in CALCOM_URLS ? tier : null;
+  const calendlyUrl = validTier ? CALCOM_URLS[validTier] : "";
   const label = validTier ? tierLabels[validTier] : null;
 
   return (
