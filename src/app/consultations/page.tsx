@@ -227,7 +227,7 @@ export default function ConsultationsPage() {
                   src="/jason.png"
                   alt="Jason — Owner of Hotel Quinto"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-center"
                   sizes="(max-width: 768px) 288px, 320px"
                   priority
                 />
