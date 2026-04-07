@@ -46,7 +46,7 @@ export async function POST(request: Request) {
         },
       ],
       mode: "payment",
-      success_url: `${origin}/consultations?success=true&tier=${t}`,
+      success_url: `${origin}/consultations/success?session_id={CHECKOUT_SESSION_ID}&tier=${t}`,
       cancel_url: `${origin}/consultations`,
     });
 

@@ -99,7 +99,7 @@ const faqs: FAQ[] = [
   {
     question: "How are consultations conducted?",
     answer:
-      "Consultations take place over a secure video call (Google Meet or Zoom). After booking, you'll receive a scheduling link to choose a time that works for you. Sessions are available Monday through Saturday, with flexibility for different time zones.",
+      "Consultations take place over a secure video call (Google Meet or Zoom). After payment, you'll immediately choose a date and time that works for you. Sessions are available Monday through Saturday, with flexibility for different time zones.",
   },
   {
     question: "What payment methods are accepted?",
@@ -137,15 +137,6 @@ const faqs: FAQ[] = [
 
 export default function ConsultationsPage() {
   const [loading, setLoading] = useState<Tier | null>(null);
-  const [success, setSuccess] = useState(false);
-
-  // Check for success param on mount
-  if (typeof window !== "undefined") {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("success") === "true" && !success) {
-      setSuccess(true);
-    }
-  }
 
   async function handleBook(tier: Tier) {
     setLoading(tier);
@@ -208,18 +199,6 @@ export default function ConsultationsPage() {
           </div>
         </div>
       </header>
-
-      {/* Success Banner */}
-      {success && (
-        <div className="bg-forest text-white py-4 px-6 text-center">
-          <div className="max-w-2xl mx-auto flex items-center justify-center gap-3">
-            <CheckCircle className="w-5 h-5 flex-shrink-0" />
-            <p className="font-medium">
-              Payment received! Jason will be in touch within 24 hours to schedule your consultation.
-            </p>
-          </div>
-        </div>
-      )}
 
       {/* Hero */}
       <section className="bg-forest text-white">
@@ -413,7 +392,7 @@ export default function ConsultationsPage() {
                 step: "2",
                 icon: <Clock className="w-5 h-5" />,
                 title: "Schedule",
-                desc: "You'll receive a scheduling link within 24 hours to pick a time that works for you.",
+                desc: "Right after payment, you'll choose a date and time that works for you using our scheduling calendar.",
               },
               {
                 step: "3",
